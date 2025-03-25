@@ -1,0 +1,721 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: outfit;
+}
+
+.footer {
+  top: 95%;
+  position: fixed;
+  height: 50px;
+  background: black;
+  color: white;
+  bottom: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+/*.top-nav {
+  position: absolute;
+  margin-left: 25%;
+  margin-top: 1%;
+  height: 40px;
+  width: 60%;
+  border-radius: 50px;
+  color: aliceblue;
+  background-color: rgb(48, 47, 47);
+  display: flex;
+  padding-left: 15px;
+  padding-top: 5px;
+}*/
+.main {
+  position: fixed;
+  /* width: 1285.6px;
+  height: 703.2px;*/
+  width: 100%;
+  height: 90%;
+}
+.top-nav {
+  position: fixed; /* Fixe la top-nav en haut */
+  top: 10px;
+  left: 25%;
+  right: 10%;
+  width: 60%;
+  z-index: 1000; /* S'assure qu'elle reste au-dessus */
+  border-radius: 50px;
+  color: aliceblue;
+  background-color: rgb(48, 47, 47);
+  display: flex;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+
+.top-nav img {
+  width: 30px;
+  border-radius: 20px;
+  margin-top: 0px;
+  margin-left: 10px;
+}
+
+.top-nav label {
+  margin-top: 5px;
+  margin-left: 150px;
+}
+
+.left-nav {
+  position: fixed;
+  z-index: 1000;
+  height: 90%;
+  width: 70px;
+  border-radius: 50px;
+  color: aliceblue;
+  /* background-color: rgba(237, 101, 43, 255);*/
+  background: linear-gradient(45deg, rgb(153, 59, 23), rgb(233, 150, 70));
+  display: block;
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding: 2px;
+  margin-top: 2%;
+  margin-left: 5px;
+}
+
+.left-nav .icons {
+  border-radius: 20px;
+  height: 60px;
+  width: 60px;
+  color: white;
+  background-color: transparent;
+  border-style: none;
+  display: block;
+  padding: 10px;
+  font-size: 30px;
+  transition: 0.6s ease;
+  margin-top: 80%;
+}
+
+.left-nav .name {
+  opacity: 0;
+  font-size: 0.8rem;
+  margin-top: 0px;
+  margin-right: 2px;
+  transition: 0.6s ease;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.icons:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+  label {
+    opacity: 1;
+    transform: translateY(-3);
+    margin-bottom: 20px;
+  }
+}
+
+/*-------------------------------------------loginPage------------------------------------------------*/
+/* Conteneur pour la vidéo */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* overflow: hidden;*/
+  z-index: -1;
+}
+
+/* La vidéo en plein écran */
+.video-background video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Assure un bon ajustement */
+}
+
+.input {
+  display: flex;
+  margin: 10px;
+}
+
+.input {
+  border-radius: 60px;
+  height: 20px;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid violet;
+  margin-bottom: 20px;
+}
+img {
+  width: 40px;
+  margin-left: 3px;
+}
+
+/* Contenu au-dessus de la vidéo */
+.form {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(7px);
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  padding-left: 30px;
+  padding: 40px;
+  filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.2));
+  background: #ffffff20;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+
+#changeSpeed {
+  margin-top: 25px;
+  width: 100px;
+  height: 50px;
+  transition: 0.3s ease;
+}
+
+/*-------------------------------HomePage--------------------------------------------------*/
+.homePageBody {
+  position: relative;
+  padding: 0;
+}
+
+.home-video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.home-video-bg video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Assure un bon ajustement */
+}
+
+.card {
+  opacity: 0; /* Commence invisible */
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.card h1 {
+  font-size: 3rem;
+  color: rgb(255, 0, 0);
+  margin-left: 100px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(0);
+    transform: translate(0%, -42%);
+    width: 100%;
+    height: 90%;
+    /*overflow: hidden;*/
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    position: relative;
+    border-radius: 50px;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.2));
+    background: #ffffff20;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-42%, -42%);
+    width: 100%;
+    height: 90%;
+    /*overflow: hidden;*/
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    position: relative;
+    border-radius: 50px;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.2));
+    background: #ffffff20;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.card::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/*------------------------------------------------Clients------------------------------------------------------------------*/
+
+.client-container {
+  height: 100%;
+  width: 92%;
+  display: flex;
+  inset: 0;
+}
+
+.table-card a {
+  text-decoration: none;
+  color: white;
+}
+
+.title a {
+  text-decoration: none;
+  color: #000;
+  margin-left: 10px;
+  transition: 0.6s ease;
+}
+
+.none {
+  display: none;
+}
+.title label {
+  font-size: 22px;
+  transition: 0.4s ease;
+  width: 92%;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.title label:hover,
+.title a:hover {
+  border-bottom: 3px solid #000; /* Bordure en bas seulement */
+  padding-bottom: 4px; /* Optionnel : espace entre le texte et la bordure */
+}
+
+.cli-pri-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cli-pri-card::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.cli-pri-card::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.cli-pri-card {
+  float: left;
+  padding: 30px;
+  background: rgba(0, 255, 38, 0);
+  width: 80%;
+  height: 100%;
+  margin-right: 40px;
+  background: #ffffff;
+  overflow-y: auto; /* Active le défilement vertical */
+  overflow-x: hidden; /* Désactive le défilement horizontal */
+}
+
+.cli-pri-card title {
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.cli-pri-card td button {
+  height: 30px;
+  width: 80px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 15px;
+  color: white;
+  background: red;
+  border-style: none;
+  cursor: pointer;
+}
+
+.table-card {
+  margin-top: 25px;
+  max-height: 400px; /* Ajuste selon ton besoin */
+}
+.table {
+  width: 50%;
+  margin: auto;
+  border-collapse: collapse;
+  background: white;
+}
+
+.t-no-style th td {
+  border: none;
+  background: #ffffff20;
+  backdrop-filter: blur(10px);
+}
+
+.btn-reset {
+  all: unset; /* Supprime tous les styles natifs */
+  cursor: pointer; /* Garde le curseur "main" */
+}
+
+th,
+td {
+  padding: 5px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 15px;
+}
+
+th {
+  background: #ff5100;
+  color: white;
+  font-size: 15px;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.searchBar form {
+  display: flex;
+  margin-top: 20px;
+}
+.searchBar input {
+  float: left;
+  width: 80%;
+  margin: auto;
+  color: black;
+  height: 40px;
+}
+
+.searchBar button {
+  height: 40px;
+  /*width: 15%;*/
+  background: rgb(235, 233, 233);
+  color: black;
+  transition: 0.3s ease-in;
+  width: 80px;
+  border-radius: 10px;
+  font-size: 15px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.searchBar input:focus {
+  border: 1px solid salmon;
+}
+
+.searchBar button:hover {
+  float: right;
+  height: 40px;
+  width: 15%;
+  background: rgb(146, 145, 145);
+  color: white;
+}
+
+/*-------------------------------------create client--------------------------------------*/
+.create-cli-form button,
+.releve button:hover,
+.compteur button {
+  border-radius: 60px;
+  height: 20px;
+  width: 300px;
+  padding: 20px;
+  margin: 5px;
+  margin-top: 20px;
+  border: 1px solid orange;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+
+.create-cli-form button:hover,
+.releve button,
+.compteur button:hover {
+  border-radius: 60px;
+  height: 20px;
+  width: 300px;
+  padding: 20px;
+  margin: 5px;
+  margin-top: 20px;
+  border: 1px solid orange;
+  margin-left: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
+  color: white;
+}
+
+.cli-sec-card input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.create-cli-form {
+  padding: 15px;
+}
+
+.c-title-label {
+  color: red;
+  margin-left: 30px;
+  font-size: 25px;
+  border-bottom: 1px solid salmon;
+  margin-top: 10px;
+}
+.create-cli-form .c-input {
+  width: 250px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-size: 15px;
+  left: 30px;
+  padding: 20px;
+
+  justify-content: center;
+}
+
+.create-cli-form .cadre {
+  width: 300px;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.cli-sec-card {
+  /* width: 500px;
+  height: 500px;
+  background: rgba(51, 0, 255, 0);
+   width: 30%;
+  height: 110%;
+  float: right;
+  overflow: scroll;*/
+  padding-top: 20px;
+}
+
+/*-------------------------------------Comptteur et relevé----------------------------------------------*/
+/*
+.corele-container {
+  display: flex;
+}
+
+.c-form {
+  display: grid;
+  columns: 1;
+}
+
+.r-form {
+  display: flex;
+  padding: 40px;
+}
+
+.r-form .label {
+  display: grid;
+  columns: 1;
+  padding: 0;
+}
+
+.r-form .input {
+  display: grid;
+  columns: 1;
+}
+
+.r-form label {
+  font-size: 20px;
+}
+
+.releve .button {
+  display: flex;
+}
+
+.compteur {
+  width: 35%;
+  height: 102%;
+  margin: 2%;
+
+  border-radius: 50px;
+  padding: 20px;
+  background-color: #f5e7de3a;
+}
+
+.releve {
+  width: 50%;
+  height: 90%;
+  border-radius: 50px;
+  background-color: #f5e7de3a;
+  padding: 20px;
+  margin: 2%;
+}
+
+.releve-form .input {
+  margin-bottom: 20px;
+}
+*/
+
+/* Conteneur principal */
+.corele-container {
+  width: 80%;
+  height: 90vh;
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles des sections */
+.releve,
+.compteur {
+  width: 57%;
+  flex: 1;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid orange;
+}
+
+/* Onglets */
+.releve-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.releve-tabs .tab-btn {
+  padding: 10px 15px;
+  border: none;
+  background: #f2f2f2;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab-btn a {
+  color: black;
+}
+
+.releve-tabs .tab-btn.active {
+  background: orange;
+  color: white;
+}
+
+/* Formulaires */
+.releve-section h2,
+.compteur h2 {
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.releve-section .compteur-label label,
+.compteur .compteur-label label {
+  display: block;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.releve-section .compteur-input input,
+.compteur .compteur-form input,
+.compte input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.releve-section .compteur-input input:focus,
+.compteur .compteur-form input:focus {
+  border-color: orange;
+}
+
+/* Boutons */
+.releve-section .compteur-button,
+.compteur .compteur-button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.releve-section .compteur-button button,
+.compteur .compteur-button button {
+  padding: 10px 15px;
+  border: none;
+  background: orange;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.releve-section .compteur-button button:hover,
+.compteur .compteur-button button:hover {
+  background: #cc7700;
+}
+
+/* Suppression */
+.suppression {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.suppression input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.suppression button {
+  padding: 10px 15px;
+  border: none;
+  background: red;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.suppression button:hover {
+  background: darkred;
+}
+
+.compteur {
+  display: grid;
+}
+.releve-section {
+  background: #ffffff;
+}

@@ -92,7 +92,7 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
     <div class="cli-sec-card">
         <div class="<?= in_array($divActive, ['div1', 'div2']) ? "create-cli" : 'none'; ?>">
             <label class="c-title-label" for="">Ajouter un nouveau compteur</label>
-            <form action="ajouter-client" method="POST" class="create-cli-form">
+            <form action="menu-ajout-compteur" method="POST" class="create-cli-form">
                 <div class="cadre"> <label for="type" class="cr-label">type du compteur</label><br>
                     <input type="text" class="c-input" name="type" placeholder="type"><br>
                 </div>

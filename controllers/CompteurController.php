@@ -28,7 +28,7 @@ class Crudcompteur
             VALUES (?, ?, ?, ?)";
 
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("ssss", $new_compteur, $_POST['codecompteur'], $_POST['type'], $_POST['pu'], $_POST['codecli']);
+        $stmt->bind_param("ssss", $new_compteur, $_POST['type'], $_POST['pu'], $_POST['codecli']);
 
         if ($stmt->execute()) {
             echo "Compteur ajouté avec succès !";

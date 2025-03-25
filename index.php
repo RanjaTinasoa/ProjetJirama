@@ -76,6 +76,7 @@ try {
             break;
         case "menu-ajout-compteur":
             Crudcompteur::read();
+            Crudcompteur::create();
             compteursPage();
         case "search-order-compteur":
             Crudcompteur::read();

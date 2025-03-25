@@ -9,7 +9,7 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
     <div class="<?= in_array($divActive, ['div1', 'div3', 'div4', 'div2']) ? "cli-pri-card" : 'none'; ?>" id="div1">
         <div class="title">
             <a href="compteur">Liste des Compteurs</a>
-            <a href="menu-ajout-compteur">Ajouter un compteur</a>
+            <a href="compteur">Ajouter un compteur</a>
         </div>
         <div class="searchBar">
             <form action="search-order-compteur" method="POST">

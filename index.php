@@ -75,7 +75,7 @@ try {
             compteursPage();
             break;
         case "menu-ajout-compteur":
-            Crudcompteur::read();
+            #Crudcompteur::read();
             compteursPage();
         case "search-order-compteur":
             Crudcompteur::read();
@@ -110,3 +110,4 @@ try {
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
 }
+

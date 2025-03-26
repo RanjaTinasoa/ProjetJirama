@@ -102,9 +102,3 @@ class FactureModel
         $result = $this->db->query($sql)->fetch_all();
     }
 }
-
-
-//----------------test-----------------//
-$instance = new FactureModel();
-$result = $instance->get_pu_elec('cli1');
-echo ($result);

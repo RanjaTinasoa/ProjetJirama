@@ -166,6 +166,31 @@ function modifierElec()
     $Elec = ReleveElec::modify($_POST['codeEl1']);
     $divPrincipal = 'divElec';
     $divActive = 'div3';
+    showArray($Elec);
 
     relevePage($divActive, $divPrincipal, $type_releve, $Elec);
+}
+
+function supprimerElec()
+{
+    $divActive = 'div4';
+    $Elec = ['codeElec' => $_POST['codeEl']]; // Passe un tableau associatif
+    $divPrincipal = 'divElec';
+    $type_releve = ReleveElec::read();
+
+    relevePage($divActive, $divPrincipal, $type_releve, $Elec);
+}
+
+/*----------------------------------facturePage------------------------------------------------------*/
+function facturePage()
+{
+    $datas_page = [
+        "description" => "page facture",
+        "title" => "page des factures",
+        "view" => "views/facturePage.php",
+        // "content" => ob_get_clean(),
+        "layout" => "views/components/layout.php",
+
+    ];
+    drawPage($datas_page);
 }

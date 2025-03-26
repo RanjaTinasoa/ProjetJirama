@@ -95,6 +95,13 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
 
                                         </form>
                                     </td>
+                                    <td>
+                                        <form action="facture" method="post">
+                                            <input type="hidden" value="<?= $l[0] ?>" name="codefact">
+                                            <button type="submit">facture</button>
+
+                                        </form>
+                                    </td>
 
 
                                 </tr>
@@ -183,8 +190,8 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
                 <button><a href="releve_eau">eau</a></button>
             </div>
             <div class="title">
-                <a href="client">Liste des relevés</a>
-                <a href="menu-ajout-client">Ajouter des relevés</a>
+                <a href="releve_eau">Liste des relevés</a>
+                <a href="menu-ajout-releve-eau">Ajouter des relevés</a>
             </div>
             <div class="searchBar">
                 <form action="search-order-releve" method="POST">
@@ -282,7 +289,7 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
         <div class="cli-sec-card">
             <div class="<?= in_array($divActive, ['div1', 'div2']) ? "create-cli" : 'none'; ?>">
                 <label class="c-title-label" for="">ajouter un relevé d'eau</label>
-                <form action="ajouter-releve" method="POST" class="create-cli-form">
+                <form action="ajouter-releve-eau" method="POST" class="create-cli-form">
                     <div class="cadre"> <label for="codecompteur" class="cr-label">codecompteur</label><br>
                         <input type="text" class="c-input" name="codecompteur" placeholder="codecompteur"><br>
                     </div>

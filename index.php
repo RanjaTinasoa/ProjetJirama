@@ -95,7 +95,10 @@ try {
             #compteursPage();
             /*  showArray($_POST);*/
             break;
-
+        /*-----------------------------------------------------factturePage---------------------------------------------------------------*/
+        case "facture":
+            facturePage();
+            break;
 
         case "compteurbrouillon":
             compteurRelevePage();
@@ -122,13 +125,18 @@ try {
             releveElecDiv();
             break;
         case "supprimer-releve-elec":
-
+            supprimerElec();
+            break;
 
         case "confirme-supprimer-releve-elec":
             ReleveElec::delete();
             ReleveElec::read();
             releveElecDiv();
-
+            /*----releveEau----------------*/
+        case "ajouter-releve-eau":
+            Releve_Eau::create();
+            Releve_Eau::read();
+            releveEeauDiv();
 
         default:
             throw new Exception("La page n'existe pas ! ");

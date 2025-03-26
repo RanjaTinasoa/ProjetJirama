@@ -13,7 +13,7 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
         </div>
         <div class="searchBar">
             <form action="search-order-compteur" method="POST">
-                <input type="text" name="codecli" placeholder="Chercher compteur" value="">
+                <input type="text" name="codecli" placeholder="Chercher compteur" value="<?php array_key_exists('codecli', $_POST) ?>">
                 <button type="submit">chercher</button>
             </form>
 

@@ -5,11 +5,16 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
 // Récupération des releves depuis le contrôleur
 ?>
 <div class="divPrincipaleReleve">
+
     <div class="<?= $divPrincipal == 'divElec' ? "client-container" : 'none'; ?>">
         <div class="<?= in_array($divActive, ['div1', 'div3', 'div4', 'div2']) ? "cli-pri-card" : 'none'; ?>" id="div1">
+            <div class="menu">
+                <button><a href="releve">électricité</a></button>
+                <button><a href="releve_eau">eau</a></button>
+            </div>
             <div class="title">
-                <a href="client">Liste des relevés</a>
-                <a href="menu-ajout-client">Ajouter des relevés</a>
+                <a href="releve">Liste des relevés</a>
+                <a href="releve">Ajouter des relevés</a>
             </div>
             <div class="searchBar">
                 <form action="search-order-releve" method="POST">
@@ -66,26 +71,26 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($releves)) : ?>
-                            <?php foreach ($releves as $releve) : ?>
+                        <?php if (!empty($list)) : ?>
+                            <?php foreach ($list as $l) : ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($releve[0]) ?></td>
-                                    <td><?= htmlspecialchars($releve[1]) ?></td>
-                                    <td><?= htmlspecialchars($releve[2]) ?></td>
-                                    <td><?= htmlspecialchars($releve[3]) ?></td>
-                                    <td><?= htmlspecialchars($releve[4]) ?></td>
-                                    <td><?= htmlspecialchars($releve[5]) ?></td>
+                                    <td><?= htmlspecialchars($l[0]) ?></td>
+                                    <td><?= htmlspecialchars($l[1]) ?></td>
+                                    <td><?= htmlspecialchars($l[2]) ?></td>
+                                    <td><?= htmlspecialchars($l[3]) ?></td>
+                                    <td><?= htmlspecialchars($l[4]) ?></td>
+                                    <td><?= htmlspecialchars($l[5]) ?></td>
 
                                     <td>
-                                        <form action="modifier-releve" method="POST">
-                                            <input type="hidden" value="<?= $releve[0] ?>" name="id">
+                                        <form action="modifier-releve-elec" method="POST">
+                                            <input type="hidden" value="<?= $l[0] ?>" name="codeEl1">
                                             <button type="submit">modifier</button>
 
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="supprimer-releve" method="post">
-                                            <input type="hidden" value="<?= $releve[0] ?>" name="ide">
+                                        <form action="supprimer-releve-elec" method="post">
+                                            <input type="hidden" value="<?= $l[0] ?>" name="codeEl">
                                             <button type="submit">supprimer</button>
 
                                         </form>
@@ -107,7 +112,7 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
         <div class="cli-sec-card">
             <div class="<?= in_array($divActive, ['div1', 'div2']) ? "create-cli" : 'none'; ?>">
                 <label class="c-title-label" for="">créer un relevé</label>
-                <form action="ajouter-releve" method="POST" class="create-cli-form">
+                <form action="ajouter-releve-elec" method="POST" class="create-cli-form">
                     <div class="cadre"> <label for="codecompteur" class="cr-label">codecompteur</label><br>
                         <input type="text" class="c-input" name="codecompteur" placeholder="codecompteur"><br>
                     </div>
@@ -134,25 +139,23 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
             <div class="<?= ($divActive === 'div3') ? "create-cli" : 'none'; ?>">
                 <label class="c-title-label" for="">modifier releve</label>
 
-                <form action="confirmer-modifier-releve" class="create-cli-form" method="POST">
-                    <input type="hidden" name="codecli" value="<?php echo htmlspecialchars($user['codecli'] ?? ''); ?>">
-                    <div class="cadre"> <label for="" class="cr-label">codeElec du releve</label><br>
-                        <input type="text" class="c-input" name="codeElec" value="<?php echo htmlspecialchars($user['codeElec'] ?? ''); ?>"><br>
-                    </div>
+                <form action="confirmer-modifier-releve-elec" class="create-cli-form" method="POST">
+                    <input type="hidden" name="codecli" value="<?php echo htmlspecialchars($releve['codeElec'] ?? ''); ?>">
+
                     <div class="cadre"> <label for="" class="cr-label">codecompteur</label><br>
-                        <input type="text" class="c-input" name="codecompteur" value="<?php echo htmlspecialchars($user['codecompteur'] ?? ''); ?>"><br>
+                        <input type="text" class="c-input" name="codecompteur" value="<?php echo htmlspecialchars($releve['codecompteur'] ?? ''); ?>"><br>
                     </div>
                     <div class="cadre"><label for="" class="cr-label">valeur du relevé de l'électricité</label><br>
-                        <input type="text" class="c-input" name="valeur1" value="<?php echo htmlspecialchars($user['valeur1'] ?? ''); ?>"><br>
+                        <input type="text" class="c-input" name="valeur1" value="<?php echo htmlspecialchars($releve['valeur1'] ?? ''); ?>"><br>
                     </div>
                     <div class="cadre"> <label for="" class="cr-label">date du releve de l'électricité</label><br>
-                        <input type="text" class="c-input" name="date_releve" value="<?php echo htmlspecialchars($user['date_releve'] ?? ''); ?>"><br>
+                        <input type="text" class="c-input" name="date_releve" value="<?php echo htmlspecialchars($releve['date_releve'] ?? ''); ?>"><br>
                     </div>
                     <div class="cadre"> <label for="" class="cr-label">date de presentation du relevé</label><br>
-                        <input type="text" class="c-input" name="date_presentation" value="<?php echo htmlspecialchars($user['date_presentation'] ?? ''); ?>"><br>
+                        <input type="text" class="c-input" name="date_presentation" value="<?php echo htmlspecialchars($releve['date_presentation'] ?? ''); ?>"><br>
                     </div>
                     <div class="cadre"> <label for="date_limite_paie" class="cr-label">date limite de paie</label><br>
-                        <input type="text" class="c-input" name="date_limite_paie" placeholder="date limite de paie"><br>
+                        <input type="text" class="c-input" name="date_limite_paie" placeholder="date limite de paie" value="<?php echo htmlspecialchars($releve['date_limite_paie'] ?? ''); ?>"><br>
                     </div>
                     <button type="submit">modifier releve</button><br>
                 </form>
@@ -160,7 +163,7 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
             </div>
             <div class="<?= ($divActive === 'div4') ? "create-cli" : 'none'; ?>">
                 <label class="c-title-label" for="">supprimer releve</label>
-                <form action="confirme-supprimer-releve" class="create-cli-form" method="POST">
+                <form action="confirme-supprimer-releve-elec" class="create-cli-form" method="POST">
                     <div class="cadre"> <label for="" class="cr-label">code du releve de l'électricité</label><br>
                         <input type="text" class="c-input" name="codeElec" placeholder="exemple: C001" value="<?php echo htmlspecialchars($releve['codeElec'] ?? ''); ?>"><br>
 
@@ -175,6 +178,10 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
     </div>
     <div class="<?= $divPrincipal == 'divEau' ? "client-container" : 'none'; ?>">
         <div class="<?= in_array($divActive, ['div1', 'div3', 'div4', 'div2']) ? "cli-pri-card" : 'none'; ?>" id="div1">
+            <div class="menu">
+                <button><a href="releve">électricité</a></button>
+                <button><a href="releve_eau">eau</a></button>
+            </div>
             <div class="title">
                 <a href="client">Liste des relevés</a>
                 <a href="menu-ajout-client">Ajouter des relevés</a>
@@ -276,9 +283,6 @@ $divPrincipal = isset($divPrincipal) ? $divPrincipal : 'divElec';
             <div class="<?= in_array($divActive, ['div1', 'div2']) ? "create-cli" : 'none'; ?>">
                 <label class="c-title-label" for="">ajouter un relevé d'eau</label>
                 <form action="ajouter-releve" method="POST" class="create-cli-form">
-                    <div class="cadre"> <label for="codeElec" class="cr-label">codeElec du releve</label><br>
-                        <input type="text" class="c-input" name="codeElec" placeholder="codeElec"><br>
-                    </div>
                     <div class="cadre"> <label for="codecompteur" class="cr-label">codecompteur</label><br>
                         <input type="text" class="c-input" name="codecompteur" placeholder="codecompteur"><br>
                     </div>

@@ -22,13 +22,13 @@ class Elec
     }*/
     public function getReleveElec($codeElec)
     {
-        $stmt = $this->db->prepare("SELECT * FROM releve_eau WHERE $codeElec = ?");
+        $stmt = $this->db->prepare("SELECT * FROM releve_elec WHERE codeElec = ?");
         $stmt->bind_param("s", $codeElec);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
 
-    /* function incrementClientId($lastId)
+    function incrementElectId($lastId)
     {
         // Vérifier s'il y a un nombre dans la chaîne
         preg_match('/(\d+)$/', $lastId, $matches);
@@ -44,5 +44,4 @@ class Elec
             return $lastId . "001";
         }
     }
-        */
 }

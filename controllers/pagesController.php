@@ -1,9 +1,10 @@
 <?php
 require_once "controllers/utilities.php";
 require_once __DIR__ . "/../models/user.php";
-require_once __DIR__ . "/../models/releveElec.php";
+/*require_once __DIR__ . "/../models/releveElec.php";*/
 require_once __DIR__ . "/releveElecController.php";
-require_once __DIR__ ."/CompteurController.php";
+require_once __DIR__ . "/CompteurController.php";
+require_once __DIR__ . "/releveEauController.php";
 
 
 
@@ -120,7 +121,7 @@ function supprimerCompteur($compteur)
     $divActive = 'div1';
     $compteur = ['codecompteur' => $compteur]; // Passe un tableau associatif
     Crudcompteur::delete();
-    compteurPage($divActive, );
+    compteurPage($divActive,);
 }
 
 function relevePage($divActive, $divPrincipal, $type_releve, $plus = "")
@@ -134,7 +135,7 @@ function relevePage($divActive, $divPrincipal, $type_releve, $plus = "")
         "divActive" => $divActive,
         "divPrincipal" => $divPrincipal,
         "releve" => $plus,
-        "releves" => $type_releve
+        "list" => $type_releve
 
 
     ];
@@ -155,4 +156,16 @@ function releveEeauDiv()
     $divPrincipal = 'divEau';
     $divActive = 'div1';
     relevePage($divActive, $divPrincipal, $type_releve);
+}
+
+
+function modifierElec()
+{
+    $type_releve = ReleveElec::read();
+    # $type_releve = "";
+    $Elec = ReleveElec::modify($_POST['codeEl1']);
+    $divPrincipal = 'divElec';
+    $divActive = 'div3';
+
+    relevePage($divActive, $divPrincipal, $type_releve, $Elec);
 }

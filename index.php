@@ -23,6 +23,7 @@ try {
 
 
 
+
     switch ($page) {
         case "accueil":
             homePage();
@@ -75,7 +76,6 @@ try {
             compteursPage();
             break;
         case "menu-ajout-compteur":
-            showArray($_POST);
             Crudcompteur::create();
             Crudcompteur::read();
             compteursPage();
@@ -105,6 +105,29 @@ try {
         case "releve":
             releveElecDiv();
             break;
+        case "releve_eau":
+            releveEeauDiv();
+            break;
+        case "ajouter-releve-elec":
+            ReleveElec::create();
+            releveElecDiv();
+            break;
+        case "modifier-releve-elec":
+            modifierElec();
+            break;
+        case "confirmer-modifier-releve-elec":
+            ReleveElec::update();
+            ReleveElec::read();
+            releveElecDiv();
+            break;
+        case "supprimer-releve-elec":
+
+
+        case "confirme-supprimer-releve-elec":
+            ReleveElec::delete();
+            ReleveElec::read();
+            releveElecDiv();
+
 
         default:
             throw new Exception("La page n'existe pas ! ");

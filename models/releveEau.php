@@ -28,7 +28,7 @@ class Eau
         return $stmt->get_result()->fetch_assoc();
     }
 
-    /* function incrementClientId($lastId)
+    function incrementEauId($lastId)
     {
         // Vérifier s'il y a un nombre dans la chaîne
         preg_match('/(\d+)$/', $lastId, $matches);
@@ -44,5 +44,4 @@ class Eau
             return $lastId . "001";
         }
     }
-        */
 }

@@ -9,8 +9,32 @@ class Releve_Eau
     {
         $releve_eauModel = new Eau();
         $db = $releve_eauModel->getDatabase();
-        $sql = 'INSERT INTO releve_eau(codeEau,codecompteur,valeur2,date_releve2,date_presentation2,date_limite_paie2) VALUES("$_POST[codeEau]","$_POST[codecompteur]","$_POST[valeur2]","$_POST[date_releve2]","$_POST[date_presentation2]","$_POST[date_limite_paie2]")';
-        $result = $db->query($sql);
+
+        // Récupérer le dernier code client
+        $sql1 = "SELECT codeEau FROM releve_eau ORDER BY codeEau DESC LIMIT 1";
+        $result = $db->query($sql1);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            $codeEau = $row['codeEau'];
+        } else {
+            $codeEau = "CLI000"; // Valeur par défaut si aucun client
+        }
+
+        // Générer le nouvel ID client
+        $new_Eau = $releve_eauModel->incrementEauId($codeEau);
+
+        // Requête préparée pour éviter les injections SQL
+        $sql = "INSERT INTO releve_eau(codeEau,codecompteur,valeur2,date_releve2,date_presentation2,date_limite_paie2)
+            VALUES (?, ?, ?, ?, ?, ?)";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("ssssss", $new_Eau, $_POST['codecompteur'], $_POST['valeur2'], $_POST['date_releve2'], $_POST['date_presentation2'], $_POST['date_limite_paie2']);
+
+        if ($stmt->execute()) {
+            echo "releve_eau ajouté avec succès !";
+        } else {
+            echo "Erreur : " . $stmt->error;
+        }
     }
     public static function read()
     {
@@ -18,6 +42,7 @@ class Releve_Eau
         $db = $releve_eauModel->getDatabase();
         $sql = 'SELECT * FROM releve_eau';
         $result = $db->query($sql)->fetch_all();
+        return $result;
     }
     public static function modify($codeEau)
     {

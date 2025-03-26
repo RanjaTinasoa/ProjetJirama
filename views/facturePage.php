@@ -27,35 +27,42 @@
             <label for="">N compteur électricité : <?php $codecompteur ?></label>
             <label for="">N compteur eau : <?php $codecompteur ?></label>
         </div>
-        <div class="titre-tab">Votre facture en détail</div>
-        <div class="tab-facture">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>électricité</th>
-                    <th>eau</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-                    <td>PU(Ar)</td>
-                    <td>Valeur</td>
-                    <td>Total</td>
-                </tr>
-                <tr>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
+        <div class="titre-tab">
+            <h3>Votre facture en détail</h3>
         </div>
+        <div class="tab-facture">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>électricité</th>
+                        <th>eau</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>PU(Ar)</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td>Valeur</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="montant">
+        <h3>le montant total à payer est : <?php $montant_total ?></h3>
     </div>
 </div>

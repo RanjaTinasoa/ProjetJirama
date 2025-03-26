@@ -14,10 +14,33 @@ class ReleveElec
     {
         $releve_elecModel = new Elec();
         $db = $releve_elecModel->getDatabase();
-        $sql = 'INSERT INTO releve_elec(codeElec,codecompteur,valeur1,date_releve,
-date_presentation,date_limite_paie) VALUES("$_POST[codeElec]","$_POST[codecompteur]",
-"$_POST[valeur1]","$_POST[date_releve]","$_POST[date_presentation]","$_POST[date_limite_paie]")';
-        $result = $db->query($sql);
+
+        // Récupérer le dernier code client
+        $sql1 = "SELECT codeElec FROM releve_elec ORDER BY codeElec DESC LIMIT 1";
+        $result = $db->query($sql1);
+
+        if ($result && $row = $result->fetch_assoc()) {
+            $codeElec = $row['codeElec'];
+        } else {
+            $codeElec = "CLI000"; // Valeur par défaut si aucun client
+        }
+
+        // Générer le nouvel ID client
+        $new_Elec = $releve_elecModel->incrementElectId($codeElec);
+
+        // Requête préparée pour éviter les injections SQL
+        $sql = "INSERT INTO releve_elec(codeElec,codecompteur,valeur1,date_releve,
+date_presentation,date_limite_paie)
+            VALUES (?, ?, ?, ?, ?, ?)";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bind_param("ssssss", $new_Elec, $_POST['codecompteur'], $_POST['valeur1'], $_POST['date_releve'], $_POST['date_presentation'], $_POST['date_limite_paie']);
+
+        if ($stmt->execute()) {
+            echo "Client ajouté avec succès !";
+        } else {
+            echo "Erreur : " . $stmt->error;
+        }
     }
     public static function read()
     {

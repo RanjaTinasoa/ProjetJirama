@@ -23,6 +23,7 @@ try {
 
 
 
+
     switch ($page) {
         case "accueil":
             homePage();
@@ -75,6 +76,9 @@ try {
             compteursPage();
             break;
         case "menu-ajout-compteur":
+            showArray($_POST);
+            Crudcompteur::create();
+            Crudcompteur::read();
             compteursPage();
         case "search-order-compteur":
             Crudcompteur::read();
@@ -91,7 +95,10 @@ try {
             #compteursPage();
             /*  showArray($_POST);*/
             break;
-
+        /*-----------------------------------------------------factturePage---------------------------------------------------------------*/
+        case "facture":
+            facturePage();
+            break;
 
         case "compteurbrouillon":
             compteurRelevePage();
@@ -102,6 +109,34 @@ try {
         case "releve":
             releveElecDiv();
             break;
+        case "releve_eau":
+            releveEeauDiv();
+            break;
+        case "ajouter-releve-elec":
+            ReleveElec::create();
+            releveElecDiv();
+            break;
+        case "modifier-releve-elec":
+            modifierElec();
+            break;
+        case "confirmer-modifier-releve-elec":
+            ReleveElec::update();
+            ReleveElec::read();
+            releveElecDiv();
+            break;
+        case "supprimer-releve-elec":
+            supprimerElec();
+            break;
+
+        case "confirme-supprimer-releve-elec":
+            ReleveElec::delete();
+            ReleveElec::read();
+            releveElecDiv();
+            /*----releveEau----------------*/
+        case "ajouter-releve-eau":
+            Releve_Eau::create();
+            Releve_Eau::read();
+            releveEeauDiv();
 
         default:
             throw new Exception("La page n'existe pas ! ");
@@ -109,4 +144,3 @@ try {
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
 }
-

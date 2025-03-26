@@ -90,8 +90,8 @@ class FactureModel{
     
 }
     public function getMonth($codecli){
-        $sql = "SELECT MONTHNAME(reau.date_limite_paye2) from releve_eau reau join compteur c on c.codecompteur=reai.codecompteur
-        join CLIENT cli ON cli.codecli=c.codecli WHERE cli.codecli='$codecli'";
+        $sql = "SELECT MONTHNAME(reau.date_limite_paie2) from releve_eau reau join compteur c on c.codecompteur=reai.codecompteur
+        join CLIENT cli ON cli.codecli=c.codecli WHERE cli.codecli='$codecli'order by date_limite_paie2 DESC LIMIT 3";
     }
     public function getDatas($codecli){
         $sql = "SELECT c.nom, c.codecli, c.quartier, r.date_presentation,r.date_limite_paie,r.codecompteur,reau.codecompteur from compteur join client c on c.codecli=compteur.codecli

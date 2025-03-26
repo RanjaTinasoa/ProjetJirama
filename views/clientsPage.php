@@ -1,6 +1,6 @@
 <?php
 $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable passée depuis le controller
-
+#bonjour Ranja
 
 // Récupération des clients depuis le contrôleur
 ?>

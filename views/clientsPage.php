@@ -90,6 +90,13 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
 
                                     </form>
                                 </td>
+                                <td>
+                                    <form action="facture" method="post">
+                                        <input type="hidden" value="<?= $client[0] ?>" name="ide">
+                                        <button type="submit">voir facture</button>
+
+                                    </form>
+                                </td>
 
 
                             </tr>

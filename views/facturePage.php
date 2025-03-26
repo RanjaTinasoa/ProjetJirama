@@ -62,4 +62,7 @@
             </table>
         </div>
     </div>
+    <div class="montant">
+        <h3>le montant total à payer est : <?php $montant_total ?></h3>
+    </div>
 </div>

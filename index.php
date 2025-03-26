@@ -4,6 +4,8 @@ require_once "controllers/pagesController.php";
 require_once "controllers/utilities.php";
 require_once "controllers/crudController.php";
 require_once "controllers/CompteurController.php";
+require_once "controllers/factureController.php";
+
 
 //print_r($_GET);
 //echo ($_GET["page"]);
@@ -97,7 +99,7 @@ try {
             break;
         /*-----------------------------------------------------factturePage---------------------------------------------------------------*/
         case "facture":
-            facturePage();
+            Facture::viewFacture($_POST['ide']);
             break;
 
         case "compteurbrouillon":

@@ -76,7 +76,6 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
                                     </form>
                                 </td>
 
-
                             </tr>
                         <?php endforeach; ?>
                     <?php else : ?>

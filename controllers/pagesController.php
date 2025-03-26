@@ -3,6 +3,7 @@ require_once "controllers/utilities.php";
 require_once __DIR__ . "/../models/user.php";
 require_once __DIR__ . "/../models/releveElec.php";
 require_once __DIR__ . "/releveElecController.php";
+require_once __DIR__ ."/CompteurController.php";
 
 
 
@@ -116,9 +117,10 @@ function modifierCompteur($compteur)
 
 function supprimerCompteur($compteur)
 {
-    $divActive = 'div4';
+    $divActive = 'div1';
     $compteur = ['codecompteur' => $compteur]; // Passe un tableau associatif
-    compteurPage($divActive, $compteur);
+    Crudcompteur::delete();
+    compteurPage($divActive, );
 }
 
 function relevePage($divActive, $divPrincipal, $type_releve, $plus = "")

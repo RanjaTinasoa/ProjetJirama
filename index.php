@@ -89,7 +89,7 @@ try {
         case "supprimer-compteur":
             $compteur = $_POST["codecompteur"];
             supprimerCompteur($compteur);
-            compteursPage();
+            #compteursPage();
             /*  showArray($_POST);*/
             break;
 

@@ -25,7 +25,7 @@ class FactureModel
     }
     public function get_pu_elec($codecli)
     {
-        $sql = "SELECT compt.pu FROM compteur compt where type='electricite' and codecli='$codecli'";
+        $sql = "SELECT compt.pu FROM compteur compt where type='électricité' and codecli='$codecli'";
         if ($this->db->query($sql)->fetch_all()) {
             $result = $this->db->query($sql)->fetch_all();
             $result = $result[0][0];
@@ -49,7 +49,7 @@ class FactureModel
     public function get_valeur_elec($codecli)
     {
         $sql = "SELECT elec.valeur1 FROM releve_elec elec INNER JOIN compteur compt ON compt.codecompteur=elec.codecompteur
-         where compt.codecli='$codecli' AND compt.type='electricite' order by elec.date_limite_paie desc limit 3";
+         where compt.codecli='$codecli' AND compt.type='électricité' order by elec.date_limite_paie desc limit 3";
         if ($this->db->query($sql)->fetch_all()) {
             $result = $this->db->query($sql)->fetch_all();
             $result = $result[0][0];
@@ -62,7 +62,7 @@ class FactureModel
     {
         $sql = "SELECT relec.valeur1*compt.pu as total from releve_elec relec INNER JOIN compteur compt 
         ON compt.codecompteur=relec.codecompteur INNER JOIN client cli on cli.codecli=compt.codecli
-        where cli.codecli='$codecli' and compt.type='electricite' order by relec.date_limite_paie desc limit 3";
+        where cli.codecli='$codecli' and compt.type='électricité' order by relec.date_limite_paie desc limit 3";
         if ($this->db->query($sql)->fetch_all()) {
             $result = $this->db->query($sql)->fetch_all();
             $res = $result[0][0];
@@ -100,11 +100,6 @@ class FactureModel
          join releve_eau reau on reau.codecompteur=compteur.codecompteur join releve_elec r on r.codecompteur=compteur.codecompteur where
           c.codecli='$codecli' order by date_limite_paie desc limit 3";
         $result = $this->db->query($sql)->fetch_all();
+        return $result;
     }
 }
-
-
-//----------------test-----------------//
-$instance = new FactureModel();
-$result = $instance->get_pu_elec('cli1');
-echo ($result);

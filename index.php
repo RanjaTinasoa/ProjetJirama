@@ -78,7 +78,6 @@ try {
             compteursPage();
             break;
         case "menu-ajout-compteur":
-            showArray($_POST);
             Crudcompteur::create();
             Crudcompteur::read();
             compteursPage();

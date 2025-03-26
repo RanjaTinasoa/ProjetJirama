@@ -166,7 +166,6 @@ function modifierElec()
     $Elec = ReleveElec::modify($_POST['codeEl1']);
     $divPrincipal = 'divElec';
     $divActive = 'div3';
-    showArray($Elec);
 
     relevePage($divActive, $divPrincipal, $type_releve, $Elec);
 }
@@ -182,7 +181,7 @@ function supprimerElec()
 }
 
 /*----------------------------------facturePage------------------------------------------------------*/
-function facturePage()
+function facturePage($plus = "")
 {
     $datas_page = [
         "description" => "page facture",
@@ -190,6 +189,7 @@ function facturePage()
         "view" => "views/facturePage.php",
         // "content" => ob_get_clean(),
         "layout" => "views/components/layout.php",
+        "facture" => $plus
 
     ];
     drawPage($datas_page);

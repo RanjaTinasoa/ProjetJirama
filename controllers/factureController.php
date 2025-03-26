@@ -14,6 +14,16 @@ class Facture
         $pu_eau = $facture_model->get_pu_eau($codecli);
         $valeur_elec = $facture_model->get_valeur_elec($codecli);
         $valeur_eau = $facture_model->get_valeur_eau($codecli);
-        facturePage();
+        $facture_datas = [
+            "montant_total" => $montant_total,
+            "datas" => $datas,
+            "pu_elec" => $pu_elec,
+            "pu_eau" => $pu_eau,
+            "valeur_elec" => $valeur_elec,
+            "valeur_eau" => $valeur_eau
+
+        ];
+
+        facturePage($facture_datas);
     }
 }

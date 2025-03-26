@@ -5,7 +5,7 @@
             <button type="submit">créer facture</button>
         </form>
     </div>
-
+    <?php showArray($facture) ?>
 
     <div class="table-facture">
         <div class="facture-card">

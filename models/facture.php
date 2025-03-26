@@ -29,7 +29,7 @@ class FactureModel{
             
         }
         else{
-            $result='aucun';
+            $result='aucun'; 
         }
         return $result;
     }

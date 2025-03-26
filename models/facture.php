@@ -102,4 +102,8 @@ class FactureModel
         $result = $this->db->query($sql)->fetch_all();
         return $result;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 43396c36877b4c2ab752e2a51e4fe117b209f0ab

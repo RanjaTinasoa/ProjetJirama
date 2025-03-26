@@ -9,7 +9,7 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
     <div class="<?= in_array($divActive, ['div1', 'div3', 'div4', 'div2']) ? "cli-pri-card" : 'none'; ?>" id="div1">
         <div class="title">
             <a href="compteur">Liste des Compteurs</a>
-            <a href="menu-ajout-compteur">Ajouter un compteur</a>
+            <a href="compteur">Ajouter un compteur</a>
         </div>
         <div class="searchBar">
             <form action="search-order-compteur" method="POST">
@@ -92,7 +92,7 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
     <div class="cli-sec-card">
         <div class="<?= in_array($divActive, ['div1', 'div2']) ? "create-cli" : 'none'; ?>">
             <label class="c-title-label" for="">Ajouter un nouveau compteur</label>
-            <form action="ajouter-client" method="POST" class="create-cli-form">
+            <form action="menu-ajout-compteur" method="POST" class="create-cli-form">
                 <div class="cadre"> <label for="type" class="cr-label">type du compteur</label><br>
                     <input type="text" class="c-input" name="type" placeholder="type"><br>
                 </div>
@@ -109,17 +109,16 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
 
         <div class="<?= ($divActive === 'div3') ? "create-cli" : 'none'; ?>">
             <label class="c-title-label" for="">modifier compteur</label>
-
             <form action="vrai-modifier" class="create-cli-form" method="POST">
-                <input type="hidden" name="codecompteur" value="<?php echo htmlspecialchars($compteur['codecompteur'] ?? ''); ?>">
+                <input type="hidden" name="codecompteur" value="<?php echo htmlspecialchars($compteur[0] ?? ''); ?>">
                 <div class="cadre"> <label for="" class="cr-label">type du compteur</label><br>
-                    <input type="text" class="c-input" name="type" value="<?php echo htmlspecialchars($compteur['type'] ?? ''); ?>"><br>
+                    <input type="text" class="c-input" name="type" value="<?php echo htmlspecialchars($compteur[1] ?? ''); ?>"><br>
                 </div>
                 <div class="cadre"> <label for="" class="cr-label">pu</label><br>
-                    <input type="text" class="c-input" name="pu" value="<?php echo htmlspecialchars($compteur['pu'] ?? ''); ?>"><br>
+                    <input type="text" class="c-input" name="pu" value="<?php echo htmlspecialchars($compteur[2] ?? ''); ?>"><br>
                 </div>
                 <div class="cadre"><label for="" class="cr-label">codecli</label><br>
-                    <input type="text" class="c-input" name="codecli" value="<?php echo htmlspecialchars($compteur['codecli'] ?? ''); ?>"><br>
+                    <input type="text" class="c-input" name="codecli" value="<?php echo htmlspecialchars($compteur[3] ?? ''); ?>"><br>
                 </div>
                 <button type="submit">modifier compteur</button><br>
             </form>

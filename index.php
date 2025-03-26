@@ -75,7 +75,13 @@ try {
             compteursPage();
             break;
         case "menu-ajout-compteur":
+<<<<<<< HEAD
             #Crudcompteur::read();
+=======
+            showArray($_POST);
+            Crudcompteur::create();
+            Crudcompteur::read();
+>>>>>>> 57d8373296ef3c04c48b57734f42289fc65d2354
             compteursPage();
         case "search-order-compteur":
             Crudcompteur::read();

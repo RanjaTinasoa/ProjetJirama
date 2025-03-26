@@ -1,0 +1,13 @@
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+$mpdf = new \Mpdf\Mpdf();
+
+// Capture du contenu de contenu.php
+ob_start();
+include('contenu.php'); // Inclure le fichier contenant le div
+$html = ob_get_clean(); // Capture le HTML et nettoie le buffer
+
+$mpdf->WriteHTML($html);
+$mpdf->Output('mon_fichier.pdf', 'D');
+?>

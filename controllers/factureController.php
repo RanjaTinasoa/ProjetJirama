@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ ."/../models/facture.php";
-require_once __DIR__ ."/../models/user.php";
+#require_once __DIR__ ."/../models/user.php";
 class Facture{
     public static function viewFacture($codecli){
         

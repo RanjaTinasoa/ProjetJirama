@@ -69,7 +69,7 @@ class Crud
     public static function read()
     {
         $userModel = new User();
-        $nom = $_POST['nom'] ?? '';
+        $nom = $_POST['nom_client'] ?? '';
         $order = $_POST['order'] ?? 'codecli';
         $svp = $userModel->getUsers($nom, $order);
         return $svp;

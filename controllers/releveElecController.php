@@ -45,7 +45,9 @@ date_presentation,date_limite_paie)
     public static function read()
     {
         $releve_elecModel = new Elec();
-        $result = $releve_elecModel->getReleveElecs();
+        $codeElec = $_POST['codeElec_s'] ?? '';
+        $order = $_POST['order'] ?? 'codeElec';
+        $result = $releve_elecModel->getReleveElecs($codeElec, $order);
         return $result;
     }
     public static function modify($codeElec)
@@ -59,17 +61,15 @@ date_presentation,date_limite_paie)
     {
         $releve_elecModel = new Elec();
         $db = $releve_elecModel->getDatabase();
-        $sql = 'UPDATE FROM releve_elec SET codecompteur="$_POST[codecompteur]",
-valeur2="$_POST[valeur1]",date_releve1="$_POST[date_releve]",
-date_presentation="$_POST[date_presentation]",date_limite_paie="$_POST[date_limite_paie]"
-WHERE codeElec="$_POST[codeElec]"';
+        $sql = "UPDATE releve_elec SET codecompteur='$_POST[codecompteur]', valeur1='$_POST[valeur1]', date_releve='$_POST[date_releve]',
+                date_presentation='$_POST[date_presentation]', date_limite_paie='$_POST[date_limite_paie]' WHERE codeElec='$_POST[codeElec]'";
         $result = $db->query($sql);
     }
     public static function delete()
     {
         $releve_elecModel = new Elec();
         $db = $releve_elecModel->getDatabase();
-        $sql = 'DELETE FROM releve_elec WHERE codeElec="$_POST[codeElec]"';
+        $sql = "DELETE FROM releve_elec WHERE codeElec='$_POST[codeElec]'";
         $result = $db->query($sql);
     }
 }

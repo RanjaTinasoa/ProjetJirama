@@ -11,9 +11,11 @@ class Elec
     {
         return $this->db;
     }
-    public function getReleveElecs($nom = '', $order = 'codeElec')
+    public function getReleveElecs($nom = '', $order = 'rc.codeElec')
     {
-        $result = $this->db->query("SELECT * FROM releve_elec WHERE codeElec LiKE \"%$nom%\" ORDER BY $order");
+        $result = $this->db->query("SELECT rc.*, c.codecli, c.nom FROM releve_elec rc join compteur co on co.codecompteur=rc.codecompteur
+         join client c on c.codecli=co.codecli  WHERE rc.codeElec LiKE '%$nom%' OR rc.codecompteur LIKE '%$nom%' 
+         OR c.codecli LIKE '%$nom%' OR c.nom LIKE '%$nom%' ORDER BY $order");
         return $result->fetch_all();
     }
     /*    public function getUser($codecli){

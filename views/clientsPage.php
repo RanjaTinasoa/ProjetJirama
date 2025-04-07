@@ -2,7 +2,13 @@
 $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable passée depuis le controller
 #bonjour Ranja
 
-// Récupération des clients depuis le contrôleur
+// Vérifier si une recherche a été soumise
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom_client'])) {
+    $_SESSION['nom_recherche'] = $_POST['nom_client']; // Stocker la valeur dans la session
+}
+
+// Récupérer la valeur de la recherche si elle existe
+$nom_recherche = isset($_SESSION['nom_recherche']) ? $_SESSION['nom_recherche'] : "";
 ?>
 
 <div class="client-container">
@@ -13,52 +19,65 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
         </div>
         <div class="searchBar">
             <form action="search-order-client" method="POST">
-                <input type="text" name="nom" placeholder="Chercher client" value="">
+                <input type="text" name="nom_client" placeholder="Chercher client" value="<?= htmlspecialchars($nom_recherche); ?>">
                 <button type="submit">chercher</button>
             </form>
 
         </div>
         <div class="table-card">
-            <table class="table">
+            <table class="cli-table">
                 <thead>
                     <tr>
                         <th>
                             <form action="search-order-client" method="POST">
                                 <input type="hidden" name="order" value="codecli">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <button class="btn-reset" type="submit">Code Client</button>
                             </form>
                         </th>
                         <th>
                             <form action="search-order-client" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="nom">
                                 <button class="btn-reset" type="submit">Nom</button>
                             </form>
                         </th>
                         <th>
                             <form action="search-order-client" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="sexe">
                                 <button class="btn-reset" type="submit">Sexe</button>
                             </form>
                         </th>
                         <th>
                             <form action="search-order-client" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="quartier">
                                 <button class="btn-reset" type="submit">Quartier</button>
                             </form>
                         </th>
                         <th>
                             <form action="search-order-client" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="niveau">
                                 <button class="btn-reset" type="submit">Niveau</button>
                             </form>
                         </th>
                         <th>
                             <form action="search-order-client" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="mail">
                                 <button class="btn-reset" type="submit">Email</button>
                             </form>
                         </th>
                         <div class="t-no-style">
+                            <th></th>
                             <th></th>
                             <th></th>
                         </div>
@@ -92,8 +111,8 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
                                 </td>
                                 <td>
                                     <form action="facture" method="post">
-                                        <input type="hidden" value="<?= $client[0] ?>" name="ide">
-                                        <button type="submit">voir facture</button>
+                                        <input type="hidden" value="<?= $client[0] ?>" name="ide_f">
+                                        <button type="submit">factures</button>
 
                                     </form>
                                 </td>
@@ -115,6 +134,8 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
         <div class="<?= in_array($divActive, ['div1', 'div2']) ? "create-cli" : 'none'; ?>">
             <label class="c-title-label" for="">créer un nouveau client</label>
             <form action="ajouter-client" method="POST" class="create-cli-form">
+                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                 <div class="cadre"> <label for="nom" class="cr-label">nom du client</label><br>
                     <input type="text" class="c-input" name="nom" placeholder="nom"><br>
                 </div>
@@ -141,6 +162,8 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
             <label class="c-title-label" for="">modifier client</label>
 
             <form action="confirmer-modifier-client" class="create-cli-form" method="POST">
+                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                 <input type="hidden" name="codecli" value="<?php echo htmlspecialchars($user['codecli'] ?? ''); ?>">
                 <div class="cadre"> <label for="" class="cr-label">nom du client</label><br>
                     <input type="text" class="c-input" name="nom" value="<?php echo htmlspecialchars($user['nom'] ?? ''); ?>"><br>
@@ -164,6 +187,8 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
         <div class="<?= ($divActive === 'div4') ? "create-cli" : 'none'; ?>">
             <label class="c-title-label" for="">supprimer client</label>
             <form action="confirme-supprimer-client" class="create-cli-form" method="POST">
+                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                 <div class="cadre"> <label for="" class="cr-label">code du client</label><br>
                     <input type="text" class="c-input" name="codecli" placeholder="exemple: C001" value="<?php echo htmlspecialchars($user['codecli'] ?? ''); ?>"><br>
 

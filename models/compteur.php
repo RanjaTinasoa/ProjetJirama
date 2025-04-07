@@ -13,18 +13,11 @@ class Compteur
     }
     public function getCompteur($codecli = '', $order = 'codecompteur')
     {
-        $result = $this->db->query("SELECT * FROM compteur WHERE codecli LiKE \"%$codecli%\" ORDER BY $order");
+        $result = $this->db->query("SELECT compteur.*, c.nom FROM compteur join client c on c.codecli=compteur.codecli 
+        WHERE c.nom LiKE '%$codecli%' OR compteur.codecompteur LIKE '%$codecli%' OR c.codecli LIKE '%$codecli%'  ORDER BY $order");
         return $result->fetch_all();
     }
 
-
-
-    public function update($codecompteur)
-    {
-        $sql = "UPDATE COMPTEUR set `type`='$_POST[type]',`pu`='$_POST[pu]',codecli='$_POST[codecli]' WHERE codecompteur='$_POST[codecompteur]'";
-        $result = $this->db->query($sql);
-        return $result->fetch_all();
-    }
 
     function incrementCompteurId($lastId)
     {

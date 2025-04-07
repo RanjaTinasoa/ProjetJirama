@@ -15,5 +15,5 @@ function drawPage($datas_page)
     require_once($view);
     $content = ob_get_clean();
     require_once($layout);
-    $divActtive = $datas_page["divActive"];
+        /* $divActtive = $datas_page["divActive"]*/;
 }

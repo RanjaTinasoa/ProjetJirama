@@ -40,18 +40,19 @@ class Crudcompteur
     public static function read()
     {
         $compteurModel = new Compteur();
-        $codecli = $_POST['codecli'] ?? '';
+        $codecli = $_POST['nom_client'] ?? '';
         $order = $_POST['order'] ?? 'codecompteur';
         $svp = $compteurModel->getCompteur($codecli, $order);
         return $svp;
     }
-    public static function update($code)
+    public static function update()
     {
         $compteurModel = new Compteur();
         $db = $compteurModel->getDatabase();
-        $update = $compteurModel->update($code);
+        $sql = "UPDATE COMPTEUR set `type`='$_POST[type]',pu='$_POST[pu]',codecli='$_POST[codecli]' WHERE codecompteur='$_POST[codecompteur]'";
+        $result = $db->query($sql);
         $compteur = $compteurModel->getCompteur();
-        return $update;
+        return $compteur;
     }
     public static function delete()
     {

@@ -39,9 +39,9 @@ class Releve_Eau
     public static function read()
     {
         $releve_eauModel = new Eau();
-        $db = $releve_eauModel->getDatabase();
-        $sql = 'SELECT * FROM releve_eau';
-        $result = $db->query($sql)->fetch_all();
+        $codeEeau = $_POST['codeEau_s'] ?? '';
+        $order = $_POST['order'] ?? 'codeEau';
+        $result = $releve_eauModel->getReleveEaux($codeEeau, $order);
         return $result;
     }
     public static function modify($codeEau)
@@ -55,17 +55,17 @@ class Releve_Eau
     {
         $releve_eauModel = new Eau();
         $db = $releve_eauModel->getDatabase();
-        $sql = 'UPDATE FROM releve_eau SET codecompteur="$_POST[codecompteur]",
-        valeur2="$_POST[valeur2]",date_releve2="$_POST[date_releve2]",
-        date_presentation2="$_POST[date_presentation2]",date_limite_paie2="$_POST[date_limite_paie2]"
-         WHERE codeEau="$_POST[codeEau]"';
+        $sql = "UPDATE releve_eau SET codecompteur='$_POST[codecompteur]',
+        valeur2='$_POST[valeur2]',date_releve2='$_POST[date_releve2]',
+        date_presentation2='$_POST[date_presentation2]',date_limite_paie2='$_POST[date_limite_paie2]'
+         WHERE codeEau='$_POST[codeEau]'";
         $result = $db->query($sql);
     }
     public static function delete()
     {
         $releve_eauModel = new Eau();
         $db = $releve_eauModel->getDatabase();
-        $sql = 'DELETE FROM releve_eau WHERE codeEau="$_POST[codeEau]"';
+        $sql = "DELETE FROM releve_eau WHERE codeEau='$_POST[codeEau]'";
         $result = $db->query($sql);
     }
 }

@@ -11,6 +11,10 @@
     <button class="icons"><a href="releve"><i class="fa-solid fa-receipt"></i><label for="" class="name">relevés</a></label></button>
 
 
+    <button class="icons"><a href="paiement"><i class="fa-solid fa-money-check-dollar"></i><label for="" class="name">paiement</a></label></button>
+
+
+
     <button class="icons"><a href=""><i class="fa-solid fa-paper-plane"></i> <label for="" class="name">mail</a></label>
     </button>
 </nav>

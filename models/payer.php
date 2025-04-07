@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../config/database.php";
-class Eau
+class PayerModel
 {
     private $db;
     public function __construct()
@@ -11,26 +11,25 @@ class Eau
     {
         return $this->db;
     }
-    public function getReleveEaux($nom = '', $order = 'codeEau')
+    public function getpayes($nom = '', $order = 'codeEau')
     {
-        $result = $this->db->query("SELECT re.*, c.codecli, c.nom FROM releve_eau re join compteur co on co.codecompteur=re.codecompteur
-         join client c on c.codecli=co.codecli  WHERE re.codeEau LiKE '%$nom%' OR re.codecompteur LIKE '%$nom%' 
-         OR c.codecli LIKE '%$nom%' OR c.nom LIKE '%$nom%'ORDER BY $order");
+        $result = $this->db->query("SELECT payer.*, c.nom FROM payer join client c on c.codecli=payer.codecli 
+        WHERE c.nom LiKE \"%$nom%\" OR idpaye LIKE '%$nom%' OR c.codecli LIKE '%$nom%' ORDER BY $order");
         return $result->fetch_all();
     }
     /*    public function getUser($codecli){
         $result = $this->db->query("SELECT * FROM CLIENT WHERE codecli='$codecli'");
-        return $result->fetch_assoc();
+        return $result->fetch_assoc()
     }*/
-    public function getReleveEau($codeEau)
+    public function getpaye($codepaie)
     {
-        $stmt = $this->db->prepare("SELECT * FROM releve_eau WHERE codeEau = ?");
-        $stmt->bind_param("s", $codeEau);
+        $stmt = $this->db->prepare("SELECT * FROM payer WHERE idpaye = ?");
+        $stmt->bind_param("s", $codepaie);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
 
-    function incrementEauId($lastId)
+    function incrementPaiementId($lastId)
     {
         // Vérifier s'il y a un nombre dans la chaîne
         preg_match('/(\d+)$/', $lastId, $matches);

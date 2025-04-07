@@ -5,6 +5,8 @@ require_once "controllers/utilities.php";
 require_once "controllers/crudController.php";
 require_once "controllers/CompteurController.php";
 require_once "controllers/factureController.php";
+require_once "controllers/payerController.php";
+
 
 
 //print_r($_GET);
@@ -74,45 +76,56 @@ try {
 
         /*----------------------------------------------------compteurPage------------------------------------------------------------ */
         case "compteur":
-            Crudcompteur::read();
             compteursPage();
             break;
         case "menu-ajout-compteur":
             Crudcompteur::create();
-            Crudcompteur::read();
             compteursPage();
         case "search-order-compteur":
-            Crudcompteur::read();
             compteursPage();
         case "modifier-compteur":
-            $compteur = $_POST["codecompteur"];
-            Crudcompteur::read();
+            $compteur = $_POST['codec'];
             modifierCompteur($compteur);
             /*  compteursPage();*/
+        case "confirmer-modifier-compteur":
+            Crudcompteur::update();
+            compteursPage();
             break;
         case "supprimer-compteur":
-            $compteur = $_POST["codecompteur"];
+            $compteur = $_POST["codecor"];
             supprimerCompteur($compteur);
             #compteursPage();
             /*  showArray($_POST);*/
             break;
         /*-----------------------------------------------------factturePage---------------------------------------------------------------*/
         case "facture":
-            Facture::viewFacture($_POST['ide']);
+            Facture::viewFacture($_POST['ide_f']);
             break;
 
         case "compteurbrouillon":
             compteurRelevePage();
             break;
+        case "imprimer-pdf":
+
+            //   showArray($_POST['active_index']);
+            Facture::imprimerPdf();
+            // Récupérer les données de la facture à partir de la requête POST
+            //   $mois = $_POST['mois'] ?? '';
+            //  $reference = $_POST['codecli'] ?? '';
+
+            break;
+
 
         /*----------------------------------------------------relevePage------------------------------------------------------------ */
 
         case "releve":
             releveElecDiv();
             break;
-        case "releve_eau":
-            releveEeauDiv();
+        case "search-order-releve-elec":
+            ReleveElec::read();
+            releveElecDiv();
             break;
+
         case "ajouter-releve-elec":
             ReleveElec::create();
             releveElecDiv();
@@ -134,11 +147,64 @@ try {
             ReleveElec::read();
             releveElecDiv();
             /*----releveEau----------------*/
+
+            /*---------------------------------Eau------------------*/
+        case "releve_eau":
+            releveEeauDiv();
+            break;
+        case "search-order-releve-eau";
+            Releve_Eau::read();
+            releveEeauDiv();
+            break;
         case "ajouter-releve-eau":
             Releve_Eau::create();
             Releve_Eau::read();
             releveEeauDiv();
+            break;
+        case "modifier-releve-eau":
+            modifierEau();
+            break;
+        case "supprimer-releve-eau":
+            supprimerEau();
+            break;
+        case "confirmer-modifier-releve-eau":
+            Releve_Eau::update();
+            Releve_Eau::read();
+            releveEeauDiv();
+            break;
+        case "confirmer-supprimer-releve-eau":
+            Releve_Eau::delete();
+            releveEeauDiv();
+            break;
+        /*----------------------------------------Payer-------------------------------------------*/
+        case "paiement":
+            paiementPage();
+            break;
+        case "search-order-payer";
+            PayerCrud::read();
+            paiementPage();
+        case "ajouter-paiement":
+            PayerCrud::create();
+            paiementPage();
+            break;
 
+        case "modifier-paiement":
+            modifierPaiement();
+            break;
+
+        case "supprimer-paiement":
+            supprimerPaiement();
+            break;
+
+
+        case "confirmer-modifier-paiement":
+            PayerCrud::update();
+            paiementPage();
+            break;
+        case "confirmer-supprimer-paiement":
+            PayerCrud::delete();
+            paiementPage();
+            break;
         default:
             throw new Exception("La page n'existe pas ! ");
     }

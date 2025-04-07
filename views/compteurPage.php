@@ -1,7 +1,13 @@
 <?php
 $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable passée depuis le controller
 
+// Vérifier si une recherche a été soumise
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nom_client'])) {
+    $_SESSION['nom_recherche'] = $_POST['nom_client']; // Stocker la valeur dans la session
+}
 
+// Récupérer la valeur de la recherche si elle existe
+$nom_recherche = isset($_SESSION['nom_recherche']) ? $_SESSION['nom_recherche'] : "";
 // Récupération des compteur depuis le contrôleur
 ?>
 
@@ -13,7 +19,7 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
         </div>
         <div class="searchBar">
             <form action="search-order-compteur" method="POST">
-                <input type="text" name="codecli" placeholder="Chercher compteur" value="<?php array_key_exists('codecli', $_POST) ?>">
+                <input type="text" name="nom_client" placeholder="Chercher le client propriétaire du compteur" value="<?= htmlspecialchars($nom_recherche); ?>">
                 <button type="submit">chercher</button>
             </form>
 
@@ -23,27 +29,43 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
                 <thead>
                     <tr>
                         <th>
-                            <form action="search-order" method="POST">
+                            <form action="search-order-compteur" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="codecompteur">
                                 <button class="btn-reset" type="submit">Code du compteur</button>
                             </form>
                         </th>
                         <th>
-                            <form action="search-order" method="POST">
+                            <form action="search-order-compteur" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="type">
                                 <button class="btn-reset" type="submit">type</button>
                             </form>
                         </th>
                         <th>
-                            <form action="search-order" method="POST">
+                            <form action="search-order-compteur" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
                                 <input type="hidden" name="order" value="pu">
                                 <button class="btn-reset" type="submit">pu</button>
                             </form>
                         </th>
                         <th>
-                            <form action="search-order" method="POST">
-                                <input type="hidden" name="order" value="codecli">
+                            <form action="search-order-compteur" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
+                                <input type="hidden" name="order" value="compteur.codecli">
                                 <button class="btn-reset" type="submit">codecli</button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="search-order-compteur" method="POST">
+                                <input type="hidden" name="nom_client" value="<?= htmlspecialchars($nom_recherche); ?>">
+
+                                <input type="hidden" name="order" value="c.nom">
+                                <button class="btn-reset" type="submit">nom du client</button>
                             </form>
                         </th>
                         <div class="t-no-style">
@@ -55,22 +77,23 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
                 </thead>
                 <tbody>
                     <?php if (!empty($compteurs)) : ?>
-                        <?php foreach ($compteurs as $compteur) : ?>
+                        <?php foreach ($compteurs as $compt) : ?>
                             <tr>
-                                <td><?= htmlspecialchars($compteur[0]) ?></td>
-                                <td><?= htmlspecialchars($compteur[1]) ?></td>
-                                <td><?= htmlspecialchars($compteur[2]) ?></td>
-                                <td><?= htmlspecialchars($compteur[3]) ?></td>
+                                <td><?= htmlspecialchars($compt[0]) ?></td>
+                                <td><?= htmlspecialchars($compt[1]) ?></td>
+                                <td><?= htmlspecialchars($compt[2]) ?></td>
+                                <td><?= htmlspecialchars($compt[3]) ?></td>
+                                <td><?= htmlspecialchars($compt[4]) ?></td>
                                 <td>
                                     <form action="modifier-compteur" method="POST">
-                                        <input type="hidden" value="<?= $compteur[0] ?>" name="codecompteur">
+                                        <input type="hidden" value="<?= $compt[0] ?>" name="codec">
                                         <button type="submit">modifier</button>
 
                                     </form>
                                 </td>
                                 <td>
                                     <form action="supprimer-compteur" method="post">
-                                        <input type="hidden" value="<?= $compteur[0] ?>" name="codecompteur">
+                                        <input type="hidden" value="<?= $compt[0] ?>" name="codeco">
                                         <button type="submit">supprimer</button>
 
                                     </form>
@@ -108,16 +131,16 @@ $divActive = isset($divActive) ? $divActive : 'div1'; // Récupérer la variable
 
         <div class="<?= ($divActive === 'div3') ? "create-cli" : 'none'; ?>">
             <label class="c-title-label" for="">modifier compteur</label>
-            <form action="vrai-modifier" class="create-cli-form" method="POST">
-                <input type="hidden" name="codecompteur" value="<?php echo htmlspecialchars($compteur[0] ?? ''); ?>">
+            <form action="confirmer-modifier-compteur" class="create-cli-form" method="POST">
+                <input type="hidden" name="codecompteur" value="<?php echo htmlspecialchars($compteur['codecompteur'] ?? ''); ?>">
                 <div class="cadre"> <label for="" class="cr-label">type du compteur</label><br>
-                    <input type="text" class="c-input" name="type" value="<?php echo htmlspecialchars($compteur[1] ?? ''); ?>"><br>
+                    <input type="text" class="c-input" name="type" value="<?php echo htmlspecialchars($compteur['type'] ?? ''); ?>"><br>
                 </div>
                 <div class="cadre"> <label for="" class="cr-label">pu</label><br>
-                    <input type="text" class="c-input" name="pu" value="<?php echo htmlspecialchars($compteur[2] ?? ''); ?>"><br>
+                    <input type="text" class="c-input" name="pu" value="<?php echo htmlspecialchars($compteur['pu'] ?? ''); ?>"><br>
                 </div>
                 <div class="cadre"><label for="" class="cr-label">codecli</label><br>
-                    <input type="text" class="c-input" name="codecli" value="<?php echo htmlspecialchars($compteur[3] ?? ''); ?>"><br>
+                    <input type="text" class="c-input" name="codecli" value="<?php echo htmlspecialchars($compteur['codecli'] ?? ''); ?>"><br>
                 </div>
                 <button type="submit">modifier compteur</button><br>
             </form>

@@ -26,6 +26,7 @@ function homePage()
 
 function clientPage($divActive, $plus = "")
 {
+    $searchValue = $_POST['nom_client'] ?? $_SESSION['nom_recherche'] ?? "";
     $userss =  Crud::read();
     $datas_page = [
         "description" => "page des clients",
@@ -35,7 +36,8 @@ function clientPage($divActive, $plus = "")
         "layout" => "views/components/layout.php",
         "divActive" => $divActive,
         "user" => $plus,
-        "users" => $userss
+        "users" => $userss,
+        "PostNom" => $searchValue
 
 
     ];
@@ -44,6 +46,7 @@ function clientPage($divActive, $plus = "")
 
 function clientsPage()
 {
+
     $divActive = 'div1';
     clientPage($divActive);
 }
@@ -91,7 +94,6 @@ function compteurPage($divActive, $plus = "")
         "description" => "page des compteur",
         "title" => "page Compteur",
         "view" => "views/compteurPage.php",
-        // "content" => ob_get_clean(),
         "layout" => "views/components/layout.php",
         "divActive" => $divActive,
         "compteur" => $plus,
@@ -180,6 +182,29 @@ function supprimerElec()
     relevePage($divActive, $divPrincipal, $type_releve, $Elec);
 }
 
+/*-------------------------------ReleveEau----------------------------------------------------------*/
+
+
+function modifierEau()
+{
+    $type_releve = Releve_Eau::read();
+    $Eau = Releve_Eau::modify($_POST['codeEau']);
+    $divPrincipal = 'divEau';
+    $divActive = 'div3';
+
+    relevePage($divActive, $divPrincipal, $type_releve, $Eau);
+}
+
+function supprimerEau()
+{
+    $divActive = 'div4';
+    $Eau = ['codeEau' => $_POST['codeEau']]; // Passe un tableau associatif
+    $divPrincipal = 'divEau';
+    $type_releve = Releve_Eau::read();
+
+    relevePage($divActive, $divPrincipal, $type_releve, $Eau);
+}
+
 /*----------------------------------facturePage------------------------------------------------------*/
 function facturePage($plus = "")
 {
@@ -192,5 +217,59 @@ function facturePage($plus = "")
         "facture" => $plus
 
     ];
+    //showArray($datas_page['facture']);
     drawPage($datas_page);
+}
+
+
+/*----------------------------PayerPage--------------------------------------------------------*/
+function payerPage($divActive, $plus = "")
+{
+
+    $paiements =  PayerCrud::read();
+    $datas_page = [
+        "description" => "page des paiement",
+        "title" => "page paiement",
+        "view" => "views/payerPage.php",
+        "layout" => "views/components/layout.php",
+        "divActive" => $divActive,
+        "paie" => $plus,
+        "paiements" => $paiements
+
+
+    ];
+    drawPage($datas_page);
+}
+
+function paiementPage()
+{
+    $divActive = 'div1';
+    payerPage($divActive);
+}
+
+function modifierPaiement()
+{
+    $dicvActive = "div3";
+    $codepaie = PayerCrud::modify($_POST['id']);
+    /*payerPage($dicvActive, $codepaie);*/
+    $paiements =  PayerCrud::read();
+    $datas_page = [
+        "description" => "page des paiement",
+        "title" => "page paiement",
+        "view" => "views/payerPage.php",
+        "layout" => "views/components/layout.php",
+        "divActive" => $dicvActive,
+        "paie" => $codepaie,
+        "paiements" => $paiements
+
+
+    ];
+    drawPage($datas_page);
+}
+
+function supprimerPaiement()
+{
+    $divActive = 'div4';
+    $idpaye = ['idpaye' => $_POST['ide']]; // Passe un tableau associatif
+    payerPage($divActive, $idpaye);
 }
